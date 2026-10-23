@@ -1,0 +1,43 @@
+services:
+  web:  
+    build: .
+    ports:
+      - "8080:80"
+
+    volumes:
+    - ./public:/var/www/html
+    - ./src:/var/www/src
+    - ./vendor:/var/www/vendor
+    - ./php:/var/www/php
+    - ./php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+
+
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.4
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: practica
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+
+    environment:
+      PMA_HOST: db
+
+    ports:
+      - "8081:80"
+
+    depends_on:
+      - db
+
+volumes:
+  db_data:

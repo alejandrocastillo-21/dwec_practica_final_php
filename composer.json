@@ -1,0 +1,15 @@
+{
+    "name": "alejandro-castillo/dwec_practica_final_php",
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alejandro Castillo Andrés",
+            "email": "alejandro@gmial.com"
+        }
+    ],
+    "require": {}
+}
