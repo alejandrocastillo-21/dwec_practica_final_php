@@ -9,14 +9,10 @@ function e(?string $text): string
     return htmlspecialchars((string) $text, ENT_QUOTES, 'UTF-8');
 }
 
-/**
- * Construye una URL de la aplicación: url('Auth', 'login') -> index.php?controller=Auth&action=login
- * Centralizar esto es útil: si en el Paso 7 pasamos a URLs limpias, solo se cambia esta función.
- */
+/** Construye la URL de una acción: url('Post', 'show', ['id' => 3]) -> /posts/3 */
 function url(?string $controller = null, ?string $action = null, array $params = []): string
 {
-    $query = array_filter(['controller' => $controller, 'action' => $action] + $params, fn($v) => $v !== null);
-    return 'index.php' . ($query ? '?' . http_build_query($query) : '');
+    return \src\Core\Router::url($controller, $action, $params);
 }
 
 /** Redirige y corta la ejecución (sin exit, el script seguiría corriendo tras el header). */

@@ -33,9 +33,9 @@ class PostController extends BaseController
     }
 
     /** Detalle de un anuncio (el id viene en la URL: ?id=3). */
-        public function show(): void
+        public function show(int $id): void
     {
-        $post = $this->posts->findWithAuthor($this->idFromRequest());
+        $post = $this->posts->findWithAuthor($id);
         if ($post === null) {
             $this->abort(404, 'El anuncio no existe.');
         }
@@ -77,16 +77,16 @@ class PostController extends BaseController
         redirect(url('Post', 'show', ['id' => $id]));
     }
 
-    public function edit(): void
+    public function edit(int $id): void
     {
-        $post = $this->findOwnedPost();
+        $post = $this->findOwnedPost($id);
         $this->renderForm('Editar anuncio', url('Post', 'update', ['id' => $post['id']]), $post);
     }
 
-    public function update(): void
+    public function update(int $id): void
     {
         $this->requirePost();
-        $post = $this->findOwnedPost();   // comprueba sesión + existencia + propiedad
+        $post = $this->findOwnedPost($id);  // comprueba sesión + existencia + propiedad
 
         [$data, $errors] = $this->validated();
         if ($errors !== []) {
@@ -102,10 +102,10 @@ class PostController extends BaseController
         redirect(url('Post', 'show', ['id' => $post['id']]));
     }
 
-    public function destroy(): void
+    public function destroy(int $id): void
     {
         $this->requirePost();
-        $post = $this->findOwnedPost();
+        $post = $this->findOwnedPost($id);
 
         $this->posts->delete((int) $post['id']);
 
@@ -118,11 +118,11 @@ class PostController extends BaseController
      * logueado es su autor. Si algo falla, corta con un error; si no, devuelve el anuncio.
      * (Autenticación = saber quién eres; autorización = saber si puedes hacer esto.)
      */
-    private function findOwnedPost(): array
+    private function findOwnedPost(int $id): array
     {
         $this->requireLogin();
 
-        $post = $this->posts->getById($this->idFromRequest());
+        $post = $this->posts->getById($id);
         if ($post === null) {
             $this->abort(404, 'El anuncio no existe.');
         }

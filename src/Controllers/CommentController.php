@@ -21,12 +21,10 @@ class CommentController extends BaseController
     }
 
     /** Guarda un comentario nuevo. El formulario llega a ?controller=Comment&action=store&post_id=N */
-    public function store(): void
+    public function store(int $postId): void
     {
         $this->requirePost();
         $this->requireLogin('Debes iniciar sesión para comentar.');
-
-        $postId = $this->idFromRequest('post_id');
 
         // Comprobamos que el anuncio existe antes de insertar: si no, la clave foránea
         // haría fallar el INSERT con una excepción en lugar de un error amable.
@@ -55,12 +53,12 @@ class CommentController extends BaseController
     }
 
     /** Opcional: el autor de un comentario puede borrarlo (mismas reglas de propiedad que en Post). */
-    public function destroy(): void
+    public function destroy(int $id): void
     {
         $this->requirePost();
         $this->requireLogin();
 
-        $comment = $this->comments->getById($this->idFromRequest());
+        $comment = $this->comments->getById($id);
         if ($comment === null) {
             $this->abort(404, 'El comentario no existe.');
         }

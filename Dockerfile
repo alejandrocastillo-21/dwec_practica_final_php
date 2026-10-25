@@ -9,4 +9,9 @@ RUN docker-php-ext-install pdo pdo_mysql \
 # "composer dump-autoload" sin instalarlo en tu máquina)
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+# Permite que public/.htaccess funcione
+RUN printf '<Directory /var/www/html>\n    AllowOverride All\n</Directory>\n' \
+        > /etc/apache2/conf-available/allow-htaccess.conf \
+    && a2enconf allow-htaccess
+
 WORKDIR /var/www

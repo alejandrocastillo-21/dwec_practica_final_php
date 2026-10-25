@@ -46,16 +46,5 @@ abstract class BaseController
         exit;
     }
 
-        /** Lee un id entero positivo de la URL (por defecto ?id=; también sirve ?post_id=). Si no es válido, 404. */
-    protected function idFromRequest(string $key = 'id'): int
-    {
-        // filter_var devuelve false si no es un entero válido (también si el parámetro no existe)
-        $id = filter_var($_GET[$key] ?? null, FILTER_VALIDATE_INT);
-        if ($id === false || $id < 1) {
-            $this->abort(404, 'Recurso no encontrado.');
-        }
-        return $id;
-    }
-
     
 }

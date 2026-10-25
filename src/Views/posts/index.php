@@ -2,9 +2,7 @@
 
 <!-- Un formulario GET reemplaza la query string de la URL, por eso controller y action
      van como campos ocultos: así la petición sigue llegando a Post::index -->
-<form action="index.php" method="get" class="search">
-    <input type="hidden" name="controller" value="Post">
-    <input type="hidden" name="action" value="index">
+<form action="<?= e(url('Post', 'index')) ?>" method="get" class="search">
     <input type="search" name="q" value="<?= e($q) ?>" placeholder="Buscar por título o categoría">
     <button type="submit">Buscar</button>
 </form>

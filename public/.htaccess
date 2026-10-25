@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Si lo pedido NO es un archivo real (-f) ni una carpeta real (-d)...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# ...entrega index.php. La URL original sigue disponible en $_SERVER['REQUEST_URI'].
+# Los archivos reales (css/style.css) se siguen sirviendo directamente.
+RewriteRule ^ index.php [L]
