@@ -224,16 +224,16 @@ En cada caso: abrir el formulario, **cambiar unas letras del `value` del campo `
 
 | Sección | Casos | ✅ Pasan | ❌ Fallan |
 |---|---|---|---|
-| Registro | 11 | ✅| ✅|
-| Login y logout | 9 |✅ |✅ |
-| Anuncios: creación | 9 | ✅| ✅|
-| Anuncios: detalle y edición | 9 | ✅| ✅|
-| Permisos | 8 | ✅| ✅|
-| Buscador | 10 | ✅| ✅|
-| Comentarios | 10 | ✅| ✅|
-| CSRF | 12 | ✅| ✅|
-| Rutas | 8 | ✅| ✅|
-| Sesión y datos | 3 | ✅| ✅|
+| Registro | 11 | ✅| |
+| Login y logout | 9 |✅ | |
+| Anuncios: creación | 9 | ✅| |
+| Anuncios: detalle y edición | 9 | ✅| |
+| Permisos | 8 | ✅| |
+| Buscador | 10 | ✅| |
+| Comentarios | 10 | ✅| |
+| CSRF | 12 | ✅| |
+| Rutas | 8 | ✅| |
+| Sesión y datos | 3 | ✅| |
 | **Total** | **89** | | |
 
 ## 8. Conclusiones
